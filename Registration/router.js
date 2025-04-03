@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const patientController = require('../controllers/patientController');
+const { registerPatient } = require('./controller'); // Import controller
 
-// POST route for patient registration
-router.post('/register', patientController.registerPatient);
+// Define routes
+router.post('/register', registerPatient);
 
 module.exports = router;
