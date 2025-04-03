@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const patientRoutes = require('./routes/patientRoutes');
+const patientRouter = require('./router'); // Import the routes
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,15 +10,12 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/patientDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect('mongodb://localhost:27017')
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.error("MongoDB Connection Failed:", err));
 
-// Routes
-app.use('/patient', patientRoutes);
+// Use patient routes
+app.use('/patient', patientRouter);
 
 // Start server
 app.listen(PORT, () => {
